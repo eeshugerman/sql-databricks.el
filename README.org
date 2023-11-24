@@ -1,0 +1,35 @@
+* sql-databricks.el
+** intro
+   This package extends Emacs' built-in =sql= package with support for
+   [[https://www.databricks.com/product/databricks-sql][Databricks SQL]]. For
+   now it merely wires-up =sql-interactive-mode= to
+   [[https://docs.databricks.com/en/dev-tools/databricks-sql-cli.html][the official CLI client]].
+   Contributions (perhaps adding other functionality, such as improved
+   font-locking) are welcome.
+
+** installation
+*** databricks-sql-cli
+    To use the =sql-interactive-mode= support, first
+    [[https://docs.databricks.com/en/dev-tools/databricks-sql-cli.html#install-the-databricks-sql-cli][install the Databricks SQL CLI]].
+
+*** this package
+    This package is not yet available from MELPA or ELPA. Instead, you may
+    install it directly from [[https://github.com/eeshugerman/sql-databricks.el][the GitHub repo]]. Here's one way to do that:
+    #+begin_src emacs-lisp
+      (package-vc-install "https://github.com/eeshugerman/sql-databricks.el")
+      (require 'sql-databricks)
+    #+end_src
+    Other (more sophisticated) approaches might involve Quelpa or =straight.el=.
+
+** usage
+   Configure connections just as for other =sql-interactive-mode= products, eg:
+   #+begin_src emacs-lisp
+          (add-to-list 'sql-connection-alist
+                       '("my databricks connection"
+                         (sql-product 'databricks)
+                         (sql-server "my-ws.cloud.databricks.com")
+                         (sql-http-path "/sql/1.0/warehouses/xxxxxxxxxxxxxxxx")
+                         (sql-access-token "dapixxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")))
+   #+end_src
+
+   Then do =M-x sql-connect= and select your connection.
